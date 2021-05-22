@@ -13,23 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.javavirys.mvvmsample.presentation.adapter
+package com.javavirys.mvvmsample.presentation.viewmodel
 
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.ViewModel
+import com.javavirys.mvvmsample.presentation.navigation.Router
 
-abstract class BaseAdapter<E : Any> : RecyclerView.Adapter<BaseViewHolder<E>>() {
+class MainViewModel(private val router: Router) : ViewModel() {
 
-    protected val list = mutableListOf<E>()
-
-    override fun onBindViewHolder(holder: BaseViewHolder<E>, position: Int) {
-        holder.onBind(list[position])
-    }
-
-    override fun getItemCount() = list.size
-
-    fun setItems(items: List<E>) {
-        list.clear()
-        list.addAll(items)
-        notifyDataSetChanged()
+    fun navigateToChannelScreen() {
+        router.navigateToChannelScreen()
     }
 }

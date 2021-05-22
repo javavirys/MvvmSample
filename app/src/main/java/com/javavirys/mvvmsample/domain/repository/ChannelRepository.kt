@@ -13,23 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.javavirys.mvvmsample.presentation.adapter
+package com.javavirys.mvvmsample.domain.repository
 
-import androidx.recyclerview.widget.RecyclerView
+import com.javavirys.mvvmsample.core.entity.Channel
 
-abstract class BaseAdapter<E : Any> : RecyclerView.Adapter<BaseViewHolder<E>>() {
+interface ChannelRepository {
 
-    protected val list = mutableListOf<E>()
-
-    override fun onBindViewHolder(holder: BaseViewHolder<E>, position: Int) {
-        holder.onBind(list[position])
-    }
-
-    override fun getItemCount() = list.size
-
-    fun setItems(items: List<E>) {
-        list.clear()
-        list.addAll(items)
-        notifyDataSetChanged()
-    }
+    suspend fun getAll(): List<Channel>
 }

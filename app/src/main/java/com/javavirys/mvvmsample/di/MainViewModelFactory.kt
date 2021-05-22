@@ -13,24 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.javavirys.mvvmsample.presentation.screen
+package com.javavirys.mvvmsample.di
 
-import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import com.javavirys.mvvmsample.R
-import com.javavirys.mvvmsample.di.MainViewModelFactory
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.javavirys.mvvmsample.presentation.navigation.Router
 import com.javavirys.mvvmsample.presentation.viewmodel.MainViewModel
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainViewModelFactory(private val router: Router) : ViewModelProvider.Factory {
 
-    private val router = Router(this, R.id.fragmentContainer)
-
-    private val model: MainViewModel by viewModels { MainViewModelFactory(router) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        model.navigateToChannelScreen()
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+            return MainViewModel(router) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
