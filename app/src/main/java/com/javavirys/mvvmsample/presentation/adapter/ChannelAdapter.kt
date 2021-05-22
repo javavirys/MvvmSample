@@ -15,13 +15,14 @@
  */
 package com.javavirys.mvvmsample.presentation.adapter
 
+import android.view.View
 import android.view.ViewGroup
 import com.javavirys.mvvmsample.R
 import com.javavirys.mvvmsample.core.entity.Channel
 import com.javavirys.mvvmsample.util.extension.inflate
 
-class ChannelAdapter : BaseAdapter<Channel>() {
+class ChannelAdapter(private val onClick: (View, Channel) -> Unit) : BaseAdapter<Channel>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ChannelViewHolder(parent.inflate(R.layout.view_channel_item))
+        ChannelViewHolder(parent.inflate(R.layout.view_channel_item), onClick)
 }

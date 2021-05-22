@@ -28,25 +28,27 @@
             android:id="@+id/channelNameTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
             android:layout_marginEnd="10dp"
+            android:gravity="bottom"
             android:textSize="23sp"
+            app:layout_constraintBottom_toBottomOf="@+id/channelDescriptionTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/avatarTextView"
-            app:layout_constraintTop_toTopOf="@+id/avatarTextView"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Channel" />
 
         <TextView
             android:id="@+id/channelDescriptionTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:maxLines="3"
+            android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/channelNameTextView"
-            app:layout_constraintTop_toBottomOf="@+id/channelNameTextView"
-            tools:text="Description" />
+            app:layout_constraintTop_toTopOf="@+id/channelNameTextView"
+            tools:text="Description"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
