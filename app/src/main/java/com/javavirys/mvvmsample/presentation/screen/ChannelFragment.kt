@@ -23,19 +23,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.javavirys.mvvmsample.R
-import com.javavirys.mvvmsample.di.ChannelViewModelFactory
+import com.javavirys.mvvmsample.di.viewmodel.ChannelViewModelFactory
 import com.javavirys.mvvmsample.presentation.adapter.ChannelAdapter
 import com.javavirys.mvvmsample.presentation.navigation.Router
 import com.javavirys.mvvmsample.presentation.viewmodel.ChannelViewModel
 
 class ChannelFragment : Fragment(R.layout.fragment_channel) {
 
-    private val router: Router by lazy {
-        Router(
-            requireActivity() as AppCompatActivity,
-            R.id.fragmentContainer
-        )
+    private val router by lazy {
+        Router(requireActivity() as AppCompatActivity, R.id.fragmentContainer)
     }
+
+    private val actionBar by lazy { (requireActivity() as AppCompatActivity).supportActionBar }
 
     private val model: ChannelViewModel by viewModels { ChannelViewModelFactory(router) }
 
@@ -48,11 +47,16 @@ class ChannelFragment : Fragment(R.layout.fragment_channel) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val channelRecyclerView =
-            ViewCompat.requireViewById<RecyclerView>(view, R.id.channelRecyclerView)
-        channelRecyclerView.adapter = adapter
+        ViewCompat.requireViewById<RecyclerView>(view, R.id.channelRecyclerView).also {
+            it.adapter = adapter
+        }
         model.getChannels().observe(viewLifecycleOwner, adapter::setItems)
         model.loadChannels()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        actionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     companion object {

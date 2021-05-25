@@ -22,13 +22,45 @@ import java.util.*
 class LocalProgramRepository : ProgramRepository {
 
     override fun getProgramByDay(channelId: Int, dayOfWeek: Int): List<Program> = when (dayOfWeek) {
-        Calendar.SUNDAY -> throw RuntimeException("Day is unsupported!")
-        Calendar.MONDAY -> throw RuntimeException("Day is unsupported!")
-        Calendar.TUESDAY -> throw RuntimeException("Day is unsupported!")
-        Calendar.WEDNESDAY -> throw RuntimeException("Day is unsupported!")
-        Calendar.THURSDAY -> throw RuntimeException("Day is unsupported!")
-        Calendar.FRIDAY -> throw RuntimeException("Day is unsupported!")
-        Calendar.SATURDAY -> throw RuntimeException("Day is unsupported!")
-        else -> throw RuntimeException("Day is unsupported!")
+        Calendar.SUNDAY -> listOf(
+            Program(0, "Program 1", "10:00"),
+            Program(1, "Program 2", "11:00"),
+            Program(2, "Program 3", "12:00"),
+            Program(3, "Program 4", "14:00"),
+            Program(4, "Program 5", "15:00"),
+            Program(5, "Program 6", "18:00"),
+            Program(6, "Program 7", "23:30"),
+            Program(7, "Program 8", "02:00"),
+            Program(8, "Program 9", "06:00"),
+            Program(9, "Program 10", "08:00")
+        )
+        Calendar.MONDAY -> listOf(
+            Program(0, "Program 1", "10:00"),
+            Program(1, "Program 2", "11:00"),
+            Program(2, "Program 3", "12:00"),
+            Program(3, "Program 4", "14:00"),
+            Program(4, "Program 5", "15:00"),
+            Program(5, "Program 6", "18:00"),
+            Program(6, "Program 7", "23:30"),
+            Program(7, "Program 8", "02:00"),
+            Program(8, "Program 9", "06:00"),
+            Program(9, "Program 10", "08:00")
+        )
+        Calendar.TUESDAY -> listOf(
+
+        )
+        Calendar.WEDNESDAY -> listOf(
+
+        )
+        Calendar.THURSDAY -> listOf(
+
+        )
+        Calendar.FRIDAY -> listOf(
+
+        )
+        Calendar.SATURDAY -> listOf(
+
+        )
+        else -> throw RuntimeException("Unsupported day")
     }
 }

@@ -16,21 +16,48 @@
 package com.javavirys.mvvmsample.presentation.screen
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
 import com.javavirys.mvvmsample.R
-import com.javavirys.mvvmsample.di.MainViewModelFactory
-import com.javavirys.mvvmsample.presentation.navigation.Router
+import com.javavirys.mvvmsample.di.RouterFactory
+import com.javavirys.mvvmsample.di.viewmodel.MainViewModelFactory
 import com.javavirys.mvvmsample.presentation.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private val router = Router(this, R.id.fragmentContainer)
+    private val router = RouterFactory.createRouter(this, R.id.fragmentContainer)
 
     private val model: MainViewModel by viewModels { MainViewModelFactory(router) }
 
+    private val toolbar: Toolbar by lazy { ActivityCompat.requireViewById(this, R.id.toolbar) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initToolbar()
         model.navigateToChannelScreen()
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
+        toolbar.setLogo(R.drawable.ic_launcher_foreground)
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 1) {
+            super.onBackPressed()
+        } else {
+            finish()
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        android.R.id.home -> {
+            onBackPressed()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 }

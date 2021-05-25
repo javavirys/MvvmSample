@@ -19,6 +19,7 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.javavirys.mvvmsample.presentation.screen.ChannelFragment
+import com.javavirys.mvvmsample.presentation.screen.ProgramFragment
 
 class Router(
     private val activity: AppCompatActivity,
@@ -30,12 +31,13 @@ class Router(
     }
 
     fun navigateToProgramScreen(channelId: Int) {
-        TODO()
+        navigateTo(ProgramFragment.newInstance(channelId))
     }
 
     private fun navigateTo(fragment: Fragment) {
         activity.supportFragmentManager.beginTransaction()
-            .add(containerVIewId, fragment)
+            .replace(containerVIewId, fragment)
+            .addToBackStack(fragment.javaClass.name)
             .commit()
     }
 }

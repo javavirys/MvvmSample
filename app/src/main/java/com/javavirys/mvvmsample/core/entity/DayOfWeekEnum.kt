@@ -13,20 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.javavirys.mvvmsample.di
+package com.javavirys.mvvmsample.core.entity
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.javavirys.mvvmsample.presentation.navigation.Router
-import com.javavirys.mvvmsample.presentation.viewmodel.MainViewModel
+enum class DayOfWeekEnum {
 
-class MainViewModelFactory(private val router: Router) : ViewModelProvider.Factory {
+    MONDAY,
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(router) as T
+    TUESDAY,
+
+    WEDNESDAY,
+
+    THURSDAY,
+
+    FRIDAY,
+
+    SATURDAY,
+
+    SUNDAY;
+
+
+    companion object {
+
+        fun findDayByIndex(index: Int): DayOfWeekEnum {
+            values().forEach {
+                if (it.ordinal + 1 == index) {
+                    return it
+                }
+            }
+            throw RuntimeException("Day not found!")
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

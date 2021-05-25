@@ -15,8 +15,8 @@
  */
 package com.javavirys.mvvmsample.presentation.entity
 
-import java.time.DayOfWeek
+import com.javavirys.mvvmsample.core.entity.DayOfWeekEnum
 
 data class DayUi(
-    val day: DayOfWeek
+    val day: DayOfWeekEnum
 ) : BaseProgramUi
