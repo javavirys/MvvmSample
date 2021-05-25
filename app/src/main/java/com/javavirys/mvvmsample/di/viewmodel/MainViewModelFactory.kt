@@ -13,22 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.javavirys.mvvmsample.di
+package com.javavirys.mvvmsample.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.javavirys.mvvmsample.data.repository.LocalChannelRepository
 import com.javavirys.mvvmsample.presentation.navigation.Router
-import com.javavirys.mvvmsample.presentation.viewmodel.ChannelViewModel
+import com.javavirys.mvvmsample.presentation.viewmodel.MainViewModel
 
-class ChannelViewModelFactory(
-    private val router: Router
-) : ViewModelProvider.Factory {
+class MainViewModelFactory(private val router: Router) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ChannelViewModel::class.java)) {
-            return ChannelViewModel(router, LocalChannelRepository()) as T
+        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+            return MainViewModel(router) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

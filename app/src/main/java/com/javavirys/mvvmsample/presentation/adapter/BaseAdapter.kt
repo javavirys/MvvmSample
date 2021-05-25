@@ -32,4 +32,9 @@ abstract class BaseAdapter<E : Any> : RecyclerView.Adapter<BaseViewHolder<E>>() 
         list.addAll(items)
         notifyDataSetChanged()
     }
+
+    fun addItems(items: List<E>) {
+        list.addAll(items)
+        notifyDataSetChanged()
+    }
 }

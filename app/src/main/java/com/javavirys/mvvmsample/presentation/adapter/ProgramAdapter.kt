@@ -19,6 +19,7 @@ import android.view.ViewGroup
 import com.javavirys.mvvmsample.R
 import com.javavirys.mvvmsample.core.entity.ProgramType
 import com.javavirys.mvvmsample.presentation.entity.BaseProgramUi
+import com.javavirys.mvvmsample.presentation.entity.DayUi
 import com.javavirys.mvvmsample.presentation.entity.ProgramUi
 import com.javavirys.mvvmsample.util.extension.inflate
 
@@ -30,14 +31,16 @@ class ProgramAdapter : BaseAdapter<BaseProgramUi>() {
     ): BaseViewHolder<BaseProgramUi> {
         return when (viewType) {
             ProgramType.PROGRAM.ordinal -> ProgramViewHolder(parent.inflate(R.layout.view_program_item))
-            else -> DayViewHolder(parent.inflate(R.layout.view_program_item))
+            ProgramType.DAY.ordinal -> DayViewHolder(parent.inflate(R.layout.view_day_item))
+            else -> throw RuntimeException("Unsupported type!")
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (list[position]) {
             is ProgramUi -> ProgramType.PROGRAM.ordinal
-            else -> ProgramType.DAY.ordinal
+            is DayUi -> ProgramType.DAY.ordinal
+            else -> throw RuntimeException("Unsupported type!")
         }
     }
 }
